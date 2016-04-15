@@ -10,9 +10,7 @@ defmodule Challenge7 do
   def run_challenge do
     file_contents("7.txt") 
     |> :binary.bin_to_list
-    |> Enum.chunk(16)
-    |> Enum.map(&decrypt/1)
-    |> Enum.join
+    |> decrypt
   end
 
   def decrypt(block) do
