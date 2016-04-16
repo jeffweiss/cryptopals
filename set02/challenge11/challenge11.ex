@@ -69,9 +69,8 @@ defmodule Challenge11 do
   end
 
   defp random_data do
-    Stream.cycle([0])
-    |> Enum.take(:crypto.rand_uniform(5, 11))
-    |> :binary.list_to_bin
+    :crypto.rand_uniform(5, 11)
+    |> :crypto.strong_rand_bytes
   end
 
   def decrypt(block, {iv, results, key}) do
