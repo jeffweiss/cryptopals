@@ -1,6 +1,24 @@
 defmodule Challenge13 do
   use Bitwise
 
+  def profile_for(email) do
+    sanitized_email =
+      email
+      |> String.replace("&", "")
+      |> String.replace("=", "")
+    %{email: sanitized_email, uid: 10, role: "user"}
+    |> bad_uri_encode
+  end
+
+  # A much better option would be to use URI.encode_query
+  defp bad_uri_encode(map) when is_map(map) do
+    for {key, value} <- map do
+      "#{key}=#{value}"
+    end
+    |> Enum.join("&")
+  end
+
+
   def random_key do
     :crypto.strong_rand_bytes(16)
   end
